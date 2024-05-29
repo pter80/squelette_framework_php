@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        {% block stylesheet  %}
+        {% endblock %}
+        <title>{% block title %} Home {% endblock %}</title>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+  
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+    </head> 
+    <body>
+        <h1>Base HTML</h1>
+       
+        {% block body %}
+        {% endblock %}
+       
+        {% block script %}
+        {% endblock %}
+</body>
+</html> 
