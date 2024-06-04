@@ -10,7 +10,17 @@ class IndexController extends Controller
     	$connectUser="Philippe";
     	$message=$params;
     	var_dump ($params);
+    	$em = $this->em;
+    	
         echo $this->twig->render('index.html', ['connectUser' =>   $connectUser]);
+    }
+    
+    public function getVilles($params) 
+    {
+        $query = $this->em->createQuery('SELECT u FROM Users u');
+        $users = $query->getResult();
+        echo $this->twig->render('table.twig', ['users' =>   $users]);
+
     }
     
     
