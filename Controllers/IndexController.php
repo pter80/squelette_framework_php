@@ -23,6 +23,14 @@ class IndexController extends Controller
         echo $this->twig->render('table.twig', ['users' =>   $users]);
 
     }
+    public function getVilles($params) 
+    {
+        $query = $this->em->createQuery("SELECT v FROM Villes v WHERE v.id BETWEEN 1 AND 20");
+        $villes = $query->getResult();
+        dump($villes);
+        //echo $this->twig->render('table.twig', ['users' =>   $users]);
+
+    }
     
     
 }
