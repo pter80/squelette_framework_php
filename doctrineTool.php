@@ -13,7 +13,7 @@ $cache=null;
 // the connection configuration
 $dbParams = array(
     'driver'   => 'pdo_mysql',
-    'user'     => 'pter',
+    'user'     => 'pter' ,
     'password' => 'plopplip',
     'dbname'   => 'pter',
 );

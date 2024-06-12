@@ -1,10 +1,10 @@
 <?php
-// src/User.php
+// src/Villes.php
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM; 
 
 #[ORM\Entity]
-#[ORM\Table(name: 'villes_france_free')]
+#[ORM\Table(name: 'villes')]
 class Villes
 {
     #[ORM\Id]
@@ -12,18 +12,12 @@ class Villes
     #[ORM\GeneratedValue]
     private int|null $id = null;
     #[ORM\nom]
-    #[ORM\Column(name: 'ville_nom',type: 'string')]
+    #[ORM\Column(type: 'string')]
     private string $nom;
-    #[ORM\Dpt]
-    #[ORM\Column(name: 'ville_departement',type: 'string')]
-    private string $dpt;
     #[ORM\cp]
-    #[ORM\Column(name: 'ville_code_postal',type: 'string')]
-    private string $cp;
-    #[ORM\pop_2012]
-    #[ORM\Column(name: 'ville_population_2012',type: 'integer')]
-    private int $pop_2012;
-
+    #[ORM\Column(type: 'string')]
+    private string $code_postal;
+   
 
     /**
      * Get id.
@@ -60,50 +54,26 @@ class Villes
     }
 
     /**
-     * Set dpt.
+     * Set codePostal.
      *
-     * @param string $dpt
+     * @param string $codePostal
      *
      * @return Villes
      */
-    public function setDpt($dpt)
+    public function setCodePostal($codePostal)
     {
-        $this->dpt = $dpt;
+        $this->code_postal = $codePostal;
 
         return $this;
     }
 
     /**
-     * Get dpt.
+     * Get codePostal.
      *
      * @return string
      */
-    public function getDpt()
+    public function getCodePostal()
     {
-        return $this->dpt;
-    }
-
-    /**
-     * Set cp.
-     *
-     * @param string $cp
-     *
-     * @return Villes
-     */
-    public function setCp($cp)
-    {
-        $this->cp = $cp;
-
-        return $this;
-    }
-
-    /**
-     * Get cp.
-     *
-     * @return string
-     */
-    public function getCp()
-    {
-        return $this->cp;
+        return $this->code_postal;
     }
 }

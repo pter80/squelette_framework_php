@@ -1,7 +1,7 @@
 <?php
-// src/User.php
+// src/Users.php
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM; 
 
 #[ORM\Entity]
 #[ORM\Table(name: 'users')]
@@ -10,12 +10,16 @@ class Users
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
-    private int|null $id = null;
+    private int $id;
+    #[ORM\nom]
     #[ORM\Column(type: 'string')]
     private string $nom;
+    #[ORM\prenom]
     #[ORM\Column(type: 'string')]
     private string $prenom;
-
+    #[ORM\ManyToOne(targetEntity: Villes::class)]
+    #[ORM\JoinColumn(name: 'ville_id', referencedColumnName: 'id')]
+    private Villes|null $ville=null;
     /**
      * Get id.
      *
@@ -72,5 +76,29 @@ class Users
     public function getPrenom()
     {
         return $this->prenom;
+    }
+
+    /**
+     * Set ville.
+     *
+     * @param \Villes|null $ville
+     *
+     * @return Users
+     */
+    public function setVille(\Villes $ville = null)
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * Get ville.
+     *
+     * @return \Villes|null
+     */
+    public function getVille()
+    {
+        return $this->ville;
     }
 }

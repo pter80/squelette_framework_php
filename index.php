@@ -9,22 +9,36 @@ session_start();
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing;
 
-$routes = new RouteCollection();
 
-$routes->add('index', new Route('/index/index/{name}', ['name' => 'World']));
-$routes->add('table', new Route('/index/table'));
+//$routes->add('index', new Route('/index/index/{name}', ['name' => 'World']));
+//$routes->add('table', new Route('/index/table'));
 
-dump($routes);
+//dump($routes);
 
 $request = Request::createFromGlobals();
 
-dump($request);
+//dump($request);
+
+$response = new Response('Goodbye!');
+//$response->send();
 
 //use User;
+$routes = new Routing\RouteCollection();
+dump($request->attributes);
 
+$route=$routes->add('user', new Routing\Route('/user/{method}', [
+    'method' => null,
+    '_controller' => function (Request $request): Response {
+        if (is_leap_year($request->attributes->get('year'))) {
+            return new Response('Yep, this is a leap year!');
+        }
+
+        return new Response('Nope, this is not a leap year.');
+    }
+]));
+dump($routes,$route);
 //$paths = array("src/Entity","toto");
 $isDevMode = true;
 $proxyDir=null;

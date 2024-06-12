@@ -28,7 +28,7 @@ class IndexController extends Controller
         $query = $this->em->createQuery("SELECT v FROM Villes v WHERE v.id BETWEEN 1 AND 20");
         $villes = $query->getResult();
         dump($villes);
-        //echo $this->twig->render('table.twig', ['users' =>   $users]);
+        echo $this->twig->render('villes.twig', ['villes' =>   $villes]);
 
     }
     
