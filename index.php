@@ -58,7 +58,7 @@ call_user_func([$class, $target],$attributes["id"]);
 die;
 
 */
-
+dump(password_algos());
 $class = "Controllers\\" . (isset($_GET['c']) ? ucfirst($_GET['c']) . 'Controller' : 'IndexController');
 
 $target = isset($_GET['t']) ? $_GET['t'] : "index";
