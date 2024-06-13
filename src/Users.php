@@ -17,7 +17,7 @@ class Users
     #[ORM\prenom]
     #[ORM\Column(type: 'string')]
     private string $prenom;
-    #[ORM\ManyToOne(targetEntity: Villes::class)]
+    #[ORM\ManyToOne(targetEntity: Villes::class, inversedBy:'users')]
     #[ORM\JoinColumn(name: 'ville_id', referencedColumnName: 'id')]
     private Villes|null $ville=null;
     /**

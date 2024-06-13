@@ -2,6 +2,8 @@
 // src/Villes.php
 
 use Doctrine\ORM\Mapping as ORM; 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'villes')]
@@ -17,7 +19,21 @@ class Villes
     #[ORM\cp]
     #[ORM\Column(type: 'string')]
     private string $code_postal;
+    #[ORM\OneToMany(targetEntity: Users::class, mappedBy: 'ville')]
+    private Collection|null $users=null;
    
+
+   
+
+   
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    
+    }
 
     /**
      * Get id.
@@ -75,5 +91,41 @@ class Villes
     public function getCodePostal()
     {
         return $this->code_postal;
+    }
+
+    /**
+     * Add user.
+     *
+     * @param \Users $user
+     *
+     * @return Villes
+     */
+    public function addUser(\Users $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user.
+     *
+     * @param \Users $user
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeUser(\Users $user)
+    {
+        return $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

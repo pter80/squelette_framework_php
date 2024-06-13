@@ -10,14 +10,25 @@ session_start();
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing;
+use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\RequestContext;
 
 
+/*
+$request = Request::createFromGlobals();
+$context = new RequestContext();
+$context->fromRequest($request);
+
+dump($context);
+$routes = new RouteCollection();
 //$routes->add('index', new Route('/index/index/{name}', ['name' => 'World']));
-//$routes->add('table', new Route('/index/table'));
+$routes->add('/ville/read', new Route('/ville/read/{id}',['id' => 2,'controller'=>'Ville','target'=>'read']));
 
 //dump($routes);
 
-$request = Request::createFromGlobals();
+
 
 //dump($request);
 
@@ -25,27 +36,29 @@ $response = new Response('Goodbye!');
 //$response->send();
 
 //use User;
-$routes = new Routing\RouteCollection();
-dump($request->attributes);
-
-$route=$routes->add('user', new Routing\Route('/user/{method}', [
-    'method' => null,
-    '_controller' => function (Request $request): Response {
-        if (is_leap_year($request->attributes->get('year'))) {
-            return new Response('Yep, this is a leap year!');
-        }
-
-        return new Response('Nope, this is not a leap year.');
-    }
-]));
-dump($routes,$route);
-//$paths = array("src/Entity","toto");
 $isDevMode = true;
 $proxyDir=null;
 $cache=null;
 
 
+$context = new RequestContext();
+$context->fromRequest($request);
+$matcher = new UrlMatcher($routes, $context);
+$attributes = $matcher->match($request->getPathInfo());
+//dump("Attributes",$attributes);
+$class="Controllers\\".$matcher->match($attributes['_route'])['controller']."Controller";
+//$class="Controllers\\".$matcher->match('/ville/liste')['controller']."Controller";
+$class=new $class;
+$target=$matcher->match($attributes['_route'])['target'];
+$params=["id"=>$matcher->match('/ville/read')['id']];
+//dump($attributes);
+call_user_func([$class, $target],$attributes["id"]); 
+die;
+
+*/
+
 $class = "Controllers\\" . (isset($_GET['c']) ? ucfirst($_GET['c']) . 'Controller' : 'IndexController');
+
 $target = isset($_GET['t']) ? $_GET['t'] : "index";
 $getParams = isset($_GET['c']) ? $_GET['c'] : null;
 $postParams = isset($_POST) ? $_POST : null;
