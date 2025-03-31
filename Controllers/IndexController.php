@@ -7,12 +7,18 @@ class IndexController extends Controller
     public function index($params)
     {
         //savoir si un utilisateur existe deja
-    	$connectUser="Philippe";
+    	$connectUser="BTS 2025";
     	$message=$params;
     	var_dump ($params);
     	$em = $this->em;
     	
         echo $this->twig->render('index.html', ['connectUser' =>   $connectUser]);
+    }
+
+    public function myMethod()
+    {
+        $myData="Bonjour Philippe";
+        echo $this->twig->render('myView.html', ['myData' =>   $myData,'message'=>"Ceci est un message"]);
     }
     
     public function getUsers($params) 

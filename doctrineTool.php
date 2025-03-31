@@ -15,7 +15,7 @@ $dbParams = array(
     'driver'   => 'pdo_mysql',
     'user'     => 'pter' ,
     'password' => 'plopplip',
-    'dbname'   => 'pter',
+    'dbname'   => 'pter_geo',
 );
 $useSimpleAnnotationReader = false;
 

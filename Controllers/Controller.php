@@ -39,7 +39,7 @@ class Controller
             'driver'   => 'pdo_mysql',
             'user'     => 'pter',
             'password' => 'plopplip',
-            'dbname'   => 'pter',
+            'dbname'   => 'pter_geo',
         );
         $useSimpleAnnotationReader = false;
         $config = ORMSetup::createAttributeMetadataConfiguration(array(__DIR__."/src/"), $isDevMode, $proxyDir, $cache, $useSimpleAnnotationReader);

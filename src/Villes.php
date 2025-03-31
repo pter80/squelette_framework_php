@@ -2,8 +2,7 @@
 // src/Villes.php
 
 use Doctrine\ORM\Mapping as ORM; 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+
 
 #[ORM\Entity]
 #[ORM\Table(name: 'villes')]
@@ -16,24 +15,18 @@ class Villes
     #[ORM\nom]
     #[ORM\Column(type: 'string')]
     private string $nom;
-    #[ORM\cp]
+    #[ORM\code_postal]
     #[ORM\Column(type: 'string')]
     private string $code_postal;
-    #[ORM\OneToMany(targetEntity: Users::class, mappedBy: 'ville')]
-    private Collection|null $users=null;
-   
+    #[ORM\ManyToOne(targetEntity: Departement::class)]
+    #[ORM\JoinColumn(name: 'departement_id', referencedColumnName: 'id')]
+    private Departement|null $departement = null;
 
-   
-
-   
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
     
-    }
+
+   
+
+    
 
     /**
      * Get id.
@@ -94,38 +87,26 @@ class Villes
     }
 
     /**
-     * Add user.
+     * Set departement.
      *
-     * @param \Users $user
+     * @param \Departement|null $departement
      *
      * @return Villes
      */
-    public function addUser(\Users $user)
+    public function setDepartement(\Departement $departement = null)
     {
-        $this->users[] = $user;
+        $this->departement = $departement;
 
         return $this;
     }
 
     /**
-     * Remove user.
+     * Get departement.
      *
-     * @param \Users $user
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     * @return \Departement|null
      */
-    public function removeUser(\Users $user)
+    public function getDepartement()
     {
-        return $this->users->removeElement($user);
-    }
-
-    /**
-     * Get users.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsers()
-    {
-        return $this->users;
+        return $this->departement;
     }
 }

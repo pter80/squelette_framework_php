@@ -3,15 +3,42 @@
 {% block stylesheet %}
 {% endblock %}
 
+{% block errMessage %}
+    <div class="errMessage">
+        {{ errMessage }}
+    </div>
+{% endblock %}
 
 {% block body %}
     <h1>Liste des villes</h1>
-    <ul>
-    {% for ville in villes %}
-        <li>{{ ville.nom }} {{ ville.codePostal }}</li>
-        {% for user in ville.users %}
-            {{ user.nom }}  
-        {% endfor %}
-    {% endfor %}
-    </ul>
+    <a class="ui-button ui-widget ui-corner-all" href="?c=ville&t=create">Création</a>
+    <table id="villes">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Code postal </th>
+                <th>Département</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ville in villes %}
+                <tr>
+                    <td>{{ ville.id }}</td>
+                    <td>{{ ville.nom }}</td>
+                    <td>{{ ville.codePostal }}</td>
+                    <td>{{ ville.departement.nom }}</td>
+                    <td><a class="ui-button ui-widget ui-corner-all" href="?c=ville&t=edit&id={{ville.id}}">Modifier</a>
+                        <a class="ui-button ui-widget ui-corner-all" href="?c=ville&t=delete&id={{ville.id}}">Supprimer</a>
+                    </td>
+                </tr> 
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block script %}
+    <script>
+        new DataTable('#villes');
+    </script>
 {% endblock %}

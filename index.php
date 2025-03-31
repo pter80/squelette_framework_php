@@ -58,15 +58,14 @@ call_user_func([$class, $target],$attributes["id"]);
 die;
 
 */
-dump(password_algos());
+//dump(password_algos());
 $class = "Controllers\\" . (isset($_GET['c']) ? ucfirst($_GET['c']) . 'Controller' : 'IndexController');
 
 $target = isset($_GET['t']) ? $_GET['t'] : "index";
 $getParams = isset($_GET['c']) ? $_GET['c'] : null;
 $postParams = isset($_POST) ? $_POST : null;
-
 $params = array(array(
-    "url"=>"http://195.154.118.169/pter/backend/bootstrap.php",
+    "url"=>"http://195.154.113.10/pter/backend/bootstrap.php",
     "message"=>(isset($_GET["message"])?$_GET['message']:""),
     "get"=>$getParams,
     "post"=>$postParams

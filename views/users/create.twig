@@ -7,14 +7,13 @@
 {% block body %}
     <h1>Création d'un utilisateur</h1>
     <form action="?c=user&t=insert" method="POST">
-        <input name="nom" >
-        <input name="prenom">
-        <select name="ville_id " id="">
-          <option value="">--Please choose an option--</option>
-          {% for ville in villes %}
-              <option value={{ ville.id }}>{{ ville.nom }}</option>
-          {% endfor %}
-        </select>
+        <div>
+            nom: <input name="nom" value="{{ user.nom }}">
+        </div>
+        <div>
+            prenom: <input name="prenom" value="{{ user.prenom }}">
+        </div>
+        
         <button type="submit">Envoyer</button>
         
     </form>
