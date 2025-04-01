@@ -91,7 +91,7 @@ class Users
      */
     public function setDateNais($dateNais)
     {
-        $this->date_nais = new DateTime("01/01/1998");
+        $this->date_nais = new DateTime($dateNais);
         
 
         return $this;
