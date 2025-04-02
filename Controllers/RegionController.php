@@ -67,20 +67,29 @@ class RegionController extends Controller
         $action=$_GET['action'];
 
         $region=$this->em->find("Region",$id);
-        
+        //dump($region->getDepartements());
+        if ($action=="addDpt"){
+            $departement=$this->em->find("Departement",$_POST['departement_id']);
+            if ($departement) {
+                //dump($departement);die;
+                $region->addDepartement($departement);
+                //dump($region);
+                $this->em->persist($region);
+                $this->em->flush();
+            }
+            header('Location:http://195.154.113.10/pter/squelette_framework_php/?c=region&t=liste'); 
+        }
 
-
-        if ($action="selectDpt"){
+        if ($action=="selectDpt"){
             if ($region) {
                 $qb=$this->em->createQueryBuilder();
                 $qb->select('d')
                     ->from('Departement','d')
-                    ->where('d.region_id=null')
-                    
+                    ->where('d.region is NULL')
                     ;
                 $query=$qb->getQuery();
                 $departements=$query->getResult();
-                echo $this->twig->render('regions/addDepartement.twig', ['region'=>$region,'action'=>'selectDpt']);
+                echo $this->twig->render('regions/addDepartement.twig', ['departements'=>$departements,'region'=>$region,'action'=>'selectDpt']);
             }
             else {
                 header('Location:http://195.154.113.10/pter/squelette_framework_php/?c=region&t=liste');

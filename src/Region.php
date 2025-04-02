@@ -3,8 +3,8 @@
 
 use Doctrine\ORM\Mapping as ORM; 
 //use Doctrine\ORM\Mapping\Entity;
-use Doctrine\Common\Collections\ArrayCollection as Collection;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'region')]
@@ -18,7 +18,7 @@ class Region
     #[ORM\Column(type: 'string')]
     private string $nom;
     #[ORM\OneToMany(targetEntity: Departement::class, mappedBy:'region')]
-    private \Doctrine\Common\Collections\Collection $departements;
+    private Collection $departements;
 
 
     public function __construct() {
@@ -68,8 +68,8 @@ class Region
      */
     public function addDepartement(\Departement $departement)
     {
-        $this->departements[] = $departement;
-
+        $departement->setRegion($this);
+        $this->departements->add($departement);
         return $this;
     }
 

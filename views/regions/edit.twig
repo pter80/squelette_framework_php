@@ -37,20 +37,7 @@
             <li>{{ departement.nom }}</li>
         {% endfor %} 
     </ul>
-    {#
-        <label for="departement">Département</label>
-        <select name="departement" id="departement">
-            {% for departement in departements %}
-                {%  if ville.departement.id == departement.id  %}               
-                    <option value="{{departement.id}}" selected>
-                {% else %}
-                    <option value="{{departement.id}}">
-                {% endif %}      
-                {{ departement.nom }}</option>
-                
-            {% endfor %}
-        </select>
-    #}
+    
     <div>
         <a class="ui-button ui-widget ui-corner-all" href="?c=region&t=addDepartement&id={{region.id}}&action=selectDpt">Ajout d'un département</a>
     </div>
