@@ -81,7 +81,8 @@ class Region
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
     public function removeDepartement(\Departement $departement)
-    {
+    {   
+        $departement->setRegion(null);
         return $this->departements->removeElement($departement);
     }
 
