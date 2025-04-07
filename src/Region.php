@@ -82,8 +82,9 @@ class Region
      */
     public function removeDepartement(\Departement $departement)
     {   
+        $result=$this->departements->removeElement($departement);
         $departement->setRegion(null);
-        return $this->departements->removeElement($departement);
+        return $result;
     }
 
     /**

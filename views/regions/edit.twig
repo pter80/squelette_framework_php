@@ -35,7 +35,7 @@
     <ul>
         <h2>Départements</h2>
         {% for departement in region.departements %}
-            <li>{{ departement.nom }}</li>
+            <li>{{ departement.nom }} <a class="ui-button ui-widget ui-corner-all" href="?c=region&t=delDepartement&id={{region.id}}&idDpt={{departement.id}}">Enlever</a> </li>
         {% endfor %} 
     </ul>
     

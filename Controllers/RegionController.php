@@ -96,4 +96,20 @@ class RegionController extends Controller
             }
         }
     }
+    public function delDepartement($params)
+    {
+        $id = $_GET["id"];
+        $idDpt= $_GET["idDpt"];
+        $region = $this->em->find("Region",$id);
+        if ($region) {
+            $departement=$this->em->find("Departement",$idDpt);
+            if ($departement) {
+                //dump("remove".$departement->getId());
+                $region->removeDepartement($departement);
+                $this->em->persist($region);
+                $this->em->flush();
+            }
+        }
+        header('Location:http://195.154.113.10/pter/squelette_framework_php/?c=region&t=liste');
+    }
 }
